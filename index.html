@@ -4,174 +4,270 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Семён Малафеев | QA Engineer</title>
+    
+    <!-- Подключаем шрифт Inter (современный, чистый) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
     <style>
-        /* СБРОС И БАЗА */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f4f7f6;
-            color: #333;
-            line-height: 1.6;
+        /* --- ПАЛИТРА ЦВЕТОВ --- */
+        :root {
+            --bg-body: #f4f6f8;       /* Светло-серый фон страницы */
+            --bg-card: #ffffff;       /* Белый фон карточки резюме */
+            --text-main: #2b323b;     /* Темно-серый (почти черный) для основного текста */
+            --text-muted: #6b7280;   /* Светло-серый для второстепенного текста */
+            --text-header: #1f2937;   /* Цвет заголовков */
+            --accent: #3b82f6;        /* Спокойный синий для акцентов */
+            --border: #e5e7eb;        /* Цвет линий-разделителей */
+            --bg-tag: #f3f4f6;        /* Фон для тегов навыков */
         }
+
+        /* --- БАЗОВЫЕ СТИЛИ --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 40px;
+        }
+
         .container {
             max-width: 1000px;
             margin: 0 auto;
-            background: #fff;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            background-color: var(--bg-card);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
         }
 
-        /* ШАПКА */
+        /* --- ШАПКА (HEADER) --- */
         header {
-            padding: 20px 40px;
-            border-bottom: 1px solid #eee;
+            padding: 24px 40px;
+            border-bottom: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
         }
+
         .header-info h1 {
-            color: #2c3e50;
-            font-size: 28px;
-            margin-bottom: 4px;
-        }
-        .header-info .position {
-            color: #3498db;
+            font-size: 24px;
             font-weight: 600;
-            font-size: 16px;
-        }
-        .contacts ul {
-            list-style: none;
-            text-align: right;
-        }
-        .contacts li {
-            margin-bottom: 6px;
-            font-size: 14px;
-            color: #666;
-        }
-        .contacts a {
-            color: #666;
-            text-decoration: none;
-            word-break: break-all;
+            color: var(--text-header);
+            letter-spacing: -0.5px;
         }
 
-        /* СЕТКА (ГЛАВНОЕ) */
-        .main-layout {
+        .header-info .position {
+            font-size: 14px;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        .contacts {
+            text-align: right;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .contacts ul {
+            list-style: none;
+        }
+
+        .contacts li {
+            margin-bottom: 6px;
+        }
+
+        .contacts a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .contacts a:hover {
+            color: var(--text-header);
+            text-decoration: none;
+        }
+
+        /* --- СЕТКА (LAYOUT) --- */
+        .main-grid {
             display: grid;
             grid-template-columns: 300px 1fr;
             gap: 40px;
             padding: 40px;
         }
 
-        /* ЛЕВАЯ КОЛОНКА */
+        /* --- ЛЕВАЯ КОЛОНКА (SIDEBAR) --- */
         .sidebar {
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
         }
-        .photo-frame {
-            width: 140px;
-            height: 140px;
+
+        .avatar-wrapper {
+            width: 130px;
+            height: 130px;
             border-radius: 50%;
-            border: 4px solid #3498db;
             overflow: hidden;
-            background: #eee;
-            margin-bottom: 20px;
+            border: 2px solid var(--border);
+            margin-bottom: 24px;
+            background-color: #f9fafb;
         }
-        .photo-frame img {
+
+        .avatar-wrapper img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        .section-left { margin-bottom: 30px; }
-        .section-title-small {
-            font-size: 16px;
-            text-transform: uppercase;
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 5px;
-            margin-bottom: 10px;
-            display: inline-block;
-        }
-        .text-block {
-            font-size: 14px;
-            color: #555;
-            text-align: left;
+
+        .section-small {
+            margin-bottom: 32px;
+            width: 100%;
         }
 
-        /* ПРАВАЯ КОЛОНКА */
-        .section-right { margin-bottom: 30px; }
-        .section-title {
-            font-size: 20px;
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
+        .section-small h3 {
+            font-size: 13px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 6px;
         }
-        
-        /* НАВЫКИ (ПЛИТОЧКИ) */
+
+        .text-body {
+            font-size: 15px;
+            color: var(--text-muted);
+        }
+
+        /* --- ПРАВАЯ КОЛОНКА (CONTENT) --- */
+        .section-large {
+            margin-bottom: 32px;
+        }
+
+        .section-large h2 {
+            font-size: 18px;
+            color: var(--text-header);
+            font-weight: 600;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+        }
+
+        /* --- НАВЫКИ (TAGS) --- */
         .skills-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-        }
-        .skill-tag {
-            background: #f0f4f8;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 13px;
-            color: #2c3e50;
+            gap: 10px;
         }
 
-        /* ПРОЕКТЫ (СЛАЙДЕР) */
-        .projects-container {
+        .skill-tag {
+            background-color: var(--bg-tag);
+            color: var(--text-main);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        /* --- ПРОЕКТЫ (СЛАЙДЕР) --- */
+        .projects-scroll {
             overflow-x: auto;
             padding-bottom: 10px;
             white-space: nowrap;
+            scrollbar-width: thin;
         }
+
         .project-card {
             display: inline-block;
             width: 260px;
-            background: #f8f9fa;
-            padding: 15px;
+            padding: 16px;
+            background-color: #f9fafb;
             border-radius: 8px;
-            border-left: 4px solid #3498db;
-            margin-right: 15px;
+            border-left: 3px solid var(--accent);
+            margin-right: 12px;
             vertical-align: top;
         }
+
         .project-card h4 {
-            color: #2c3e50;
-            margin-bottom: 8px;
             font-size: 16px;
-        }
-        .project-card p {
-            font-size: 13px;
-            color: #666;
+            color: var(--text-header);
+            margin-bottom: 8px;
         }
 
-        /* СПИСКИ И БЛОКИ ТЕКСТА */
-        .edu-list li { margin-bottom: 15px; }
-        .edu-item h5 { color: #2c3e50; margin-bottom: 4px; }
-        .edu-item span { color: #666; font-size: 14px; }
-        .edu-item p { color: #666; font-size: 13px; }
-        
-        .exp-block {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 5px;
+        .project-card p {
             font-size: 14px;
-            color: #555;
+            color: var(--text-muted);
+        }
+
+        /* --- СПИСКИ И БЛОКИ --- */
+        .edu-list li {
+            margin-bottom: 16px;
+        }
+
+        .edu-item h4 {
+            color: var(--text-header);
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .edu-item span {
+            color: var(--accent);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .edu-item p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .exp-block {
+            background-color: #f9fafb;
+            padding: 16px;
+            border-radius: 8px;
+            border-left: 3px solid #ccc; /* Нейтральный серый для нерелевантного опыта */
+            font-size: 14px;
+            color: var(--text-muted);
             line-height: 1.5;
         }
 
-        /* АДАПТИВНОСТЬ */
+        .exp-block strong {
+            color: var(--text-header);
+        }
+
+        /* --- АДАПТИВНОСТЬ (МОБИЛЬНЫЕ) --- */
         @media (max-width: 768px) {
-            .main-layout { grid-template-columns: 1fr; padding: 20px; }
-            header { flex-direction: column; align-items: center; text-align: center; }
-            .contacts ul { text-align: center; margin-top: 15px; }
-            .sidebar { align-items: center; }
-            .text-block { text-align: center; }
+            .main-grid {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+            header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .contacts {
+                text-align: center;
+                margin-top: 20px;
+            }
+            .contacts li {
+                text-align: center;
+            }
+            .sidebar {
+                align-items: center;
+            }
+            .text-body {
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -181,7 +277,7 @@
     <header>
         <div class="header-info">
             <h1>Семён Малафеев</h1>
-            <div class="position">QA Engineer / QA Trainee</div>
+            <div class="position">QA Engineer / Trainee</div>
         </div>
         <div class="contacts">
             <ul>
@@ -196,27 +292,27 @@
         </div>
     </header>
 
-    <div class="main-layout">
+    <div class="main-grid">
         <!-- ЛЕВАЯ КОЛОНКА -->
         <aside class="sidebar">
-            <div class="photo-frame">
+            <div class="avatar-wrapper">
                 <!-- !!! ВСТАВИТЬ ССЫЛКУ НА ФОТО НИЖЕ !!! -->
-                <!-- Если есть фото, замени src на путь к файлу, например: src="img/photo.jpg" -->
-                <img src="https://via.placeholder.com/140" alt="Фото">
+                <!-- Если фото есть в папке img, напиши src="img/photo.jpg" -->
+                <img src="https://via.placeholder.com/130" alt="Фото Семёна Малафеева">
             </div>
 
-            <section class="section-left">
-                <div class="section-title-small">О себе</div>
-                <div class="text-block">
+            <section class="section-small">
+                <h3>О себе</h3>
+                <div class="text-body">
                     Активно изучаю тестирование: прохожу курс на «Яндекс Практикуме» по ручному тестированию, много практикуюсь на открытых тестовых стендах. Умею составлять тест-кейсы и баг-репорты. Знаю базовые техники тест-дизайна, понимаю разницу между smoke, regression и acceptance-тестированием, разбираюсь в основах мобильного тестирования.
                     <br><br>
                     Сильные стороны — внимание к деталям, умение задавать уточняющие вопросы, работать в команде. Готов выполнять задачи под руководством наставника, быстро осваивать новые инструменты и участвовать в полном цикле тестирования.
                 </div>
             </section>
 
-            <section class="section-left">
-                <div class="section-title-small">Хобби</div>
-                <div class="text-block">
+            <section class="section-small">
+                <h3>Хобби</h3>
+                <div class="text-body">
                     Увлекаюсь фотографией, хожу в походы.
                 </div>
             </section>
@@ -224,8 +320,8 @@
 
         <!-- ПРАВАЯ КОЛОНКА -->
         <main class="content">
-            <section class="section-right">
-                <h2 class="section-title">Профессиональные навыки</h2>
+            <section class="section-large">
+                <h2>Профессиональные навыки</h2>
                 <div class="skills-grid">
                     <span class="skill-tag">мобильное тестирование, снифферы, эмуляторы</span>
                     <span class="skill-tag">основы работы с Linux</span>
@@ -240,23 +336,23 @@
                 </div>
             </section>
 
-            <section class="section-right">
-                <h2 class="section-title">Ключевые преимущества</h2>
-                <div class="text-block">
+            <section class="section-large">
+                <h2>Ключевые преимущества</h2>
+                <div class="text-body">
                     практический опыт работы с документацией и процессами контроля качества; аналитический подход к решению задач и выявлению проблем; внимание к деталям при проверке результатов; способность быстро осваивать новые технологии и инструменты; готовность к постоянному профессиональному развитию.
                 </div>
             </section>
 
-            <section class="section-right">
-                <h2 class="section-title">Моя цель</h2>
-                <div class="text-block">
+            <section class="section-large">
+                <h2>Моя цель</h2>
+                <div class="text-body">
                     Стремлюсь применить опыт работы с процессами контроля и документацией в роли QA-инженера или QA-стажёра, постоянно совершенствовать навыки. Сейчас у меня много свободного времени — активно ищу возможность присоединиться к команде.
                 </div>
             </section>
 
-            <section class="section-right">
-                <h2 class="section-title">Проекты / Практика</h2>
-                <div class="projects-container">
+            <section class="section-large">
+                <h2>Проекты / Практика</h2>
+                <div class="projects-scroll">
                     <div class="project-card">
                         <h4>Manual-testing</h4>
                         <p>Тренировка решения ручных QA-задач, составление тест-кейсов и баг-репортов на учебных стендах.</p>
@@ -268,38 +364,38 @@
                 </div>
             </section>
 
-            <section class="section-right">
-                <h2 class="section-title">Образование и курсы</h2>
+            <section class="section-large">
+                <h2>Образование и курсы</h2>
                 <ul class="edu-list">
                     <li>
                         <div class="edu-item">
-                            <h5>Санкт-Петербургский Архитектурно-Строительный Колледж</h5>
+                            <h4>Санкт-Петербургский Архитектурно-Строительный Колледж</h4>
                             <span>Специальность: техник, «Строительство и эксплуатация зданий и сооружений»</span>
                         </div>
                     </li>
                     <li>
                         <div class="edu-item">
-                            <h5>Московский открытый институт</h5>
+                            <h4>Московский открытый институт</h4>
                             <span>Специальность: инженер, инженер-архитектор («Промышленное и гражданское строительство»)</span>
                         </div>
                     </li>
                     <li>
                         <div class="edu-item">
-                            <h5>Санкт-Петербургский государственный инженерно-экономический университет («ИНЖЭКОН»)</h5>
+                            <h4>Санкт-Петербургский государственный инженерно-экономический университет («ИНЖЭКОН»)</h4>
                             <span>Специальность: менеджер городского хозяйства</span>
                         </div>
                     </li>
                     <li>
                         <div class="edu-item">
-                            <h5>Курсы</h5>
+                            <h4>Курсы</h4>
                             <p>«Поколение Python»: курс для начинающих (2025); QA PROKA4: курс по ручному тестированию (2026); «Основы Git и GitHub» (2026); «Твой JavaScript» (2026); Яндекс Практикум: «Инженер по ручному тестированию» (в процессе обучения).</p>
                         </div>
                     </li>
                 </ul>
             </section>
 
-            <section class="section-right">
-                <h2 class="section-title">Опыт (не релевантный для QA)</h2>
+            <section class="section-large">
+                <h2>Опыт (не релевантный для QA)</h2>
                 <div class="exp-block">
                     <strong>ООО «Пролайн», инженер производственно-технического отдела</strong><br><br>
                     Обязанности: ведение и анализ исполнительной документации, проработка требований заказчика, обоснование и защита своей позиции, разработка исполнительных схем и проектной документации в AutoCAD, ArchiCAD, 3ds Max, Photoshop, Microsoft Office, Adobe Acrobat Pro.
